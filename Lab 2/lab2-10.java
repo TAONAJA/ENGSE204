@@ -1,38 +1,52 @@
 import java.util.Scanner;
-class Student {
+class Product {
     private String name;
-    private int midtermScore;
-    private int finalScore;
-    public Student(String name, int midtermScore, int finalScore) {
+    private double price;
+    public Product(String name, double price) {
         this.name = name;
-        this.midtermScore = midtermScore;
-        this.finalScore = finalScore;
-    }ย
-    public double calculateAverage() {
-        return (this.midtermScore + this.finalScore) / 2.0; 
+        this.price = price;
     }
-    public void displaySummary() {
-        double average = calculateAverage();
-        String status;
-        if (average >= 50.0) {
-            status = "Pass";
+    public double getPrice() {
+        return price;
+    }
+}
+class ShoppingCart {
+    private Product[] items = new Product[10];
+    private int itemCount = 0;
+    public void addProduct(Product p) {
+        if (itemCount < items.length) {
+            items[itemCount] = p;
+            itemCount++;
         } else {
-            status = "Fail";
         }
-        System.out.println("Name: " + this.name);
-        System.out.println("Average Score: " + String.format("%.1f", average)); 
-        System.out.println("Status: " + status);
+    }
+    public double calculateTotalPrice() {
+        double totalPrice = 0.0;
+        for (int i = 0; i < itemCount; i++) {
+            totalPrice += items[i].getPrice();
+        }
+        return totalPrice;
     }
 }
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        String studentName = scanner.nextLine();
-        int midterm = scanner.nextInt();
-        int finalS = scanner.nextInt();
-        
-        scanner.close();
-        Student student = new Student(studentName, midterm, finalS);
-        student.displaySummary();
+
+        try {
+            int N = Integer.parseInt(scanner.nextLine());
+            ShoppingCart cart1 = new ShoppingCart();
+            for (int i = 0; i < N; i++) {
+                String productName = scanner.nextLine();
+                double productPrice = Double.parseDouble(scanner.nextLine());
+                Product newProduct = new Product(productName, productPrice);
+                cart1.addProduct(newProduct);
+            }
+            double finalPrice = cart1.calculateTotalPrice();
+            System.out.println(String.format("%.1f", finalPrice));
+            
+        } catch (Exception e) {
+        } finally {
+            scanner.close();
+        }
     }
 }

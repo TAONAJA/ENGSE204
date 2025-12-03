@@ -5,7 +5,7 @@ class Student {
     public static int studentCount = 0;
     public Student(String studentId, String name) {
         this.studentId = studentId;
-        this.name = name; ถูกเรียก
+        this.name = name;
         Student.studentCount++;
     }
 }
@@ -22,4 +22,5 @@ public class Main {
         System.out.println(Student.studentCount);
         scanner.close();
     }
+
 }

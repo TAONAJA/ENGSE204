@@ -1,16 +1,10 @@
-package lab1_4;
-
 import java.util.Scanner;
 
-public class lab1_4 {
+public class Student {
     public static void main(String[] args) {
-
         Scanner reader = new Scanner(System.in);
-
         int score = Integer.parseInt(reader.nextLine().trim());
-
         String grade;
-
         if (score >= 80) {
             grade = "A";
         } else if (score >= 70) {
@@ -22,9 +16,7 @@ public class lab1_4 {
         } else {
             grade = "F";
         }
-
         System.out.println(grade);
-
         reader.close();
     }
 }

@@ -5,9 +5,9 @@ class Employee {
     private String name;
     private double monthlySalary;
 
-    // Constructor
     public Employee(String name, double monthlySalary) {
         this.name = name;
+
         if (monthlySalary > 0) {
             this.monthlySalary = monthlySalary;
         } else {
@@ -15,53 +15,65 @@ class Employee {
         }
     }
 
-    // Getter
     public String getName() {
-        return name;
+        return this.name;
     }
 
-    // Give raise
     public void giveRaise(double amount) {
+
         if (amount > 0) {
-            monthlySalary += amount;
+            this.monthlySalary = this.monthlySalary + amount;
             System.out.println("Raise applied.");
         } else {
             System.out.println("Invalid amount.");
         }
+
     }
 
-    // Private helper
     private double getAnnualSalary() {
-        return monthlySalary * 12;
+
+        double annualSalary;
+        annualSalary = this.monthlySalary * 12;
+        return annualSalary;
+
     }
 
-    // Tax calculation
     public double calculateTax(double taxRate) {
-        return getAnnualSalary() * taxRate;
+
+        double annualSalary;
+        double tax;
+
+        annualSalary = getAnnualSalary();
+        tax = annualSalary * taxRate;
+
+        return tax;
     }
 }
 
 public class Main {
+
     public static void main(String[] args) {
 
-        Scanner sc = new Scanner(System.in);
+        Scanner input = new Scanner(System.in);
 
-        String name = sc.nextLine();
-        double monthlySalary = sc.nextDouble();
-        double taxRate = sc.nextDouble();
-        double raiseAmount = sc.nextDouble();
+        String name;
+        double monthlySalary;
+        double taxRate;
+        double raiseAmount;
+
+        name = input.nextLine();
+        monthlySalary = input.nextDouble();
+        taxRate = input.nextDouble();
+        raiseAmount = input.nextDouble();
 
         Employee emp = new Employee(name, monthlySalary);
 
-        // Before raise
         System.out.println("Tax (Before): " + emp.calculateTax(taxRate));
 
-        // Raise
         emp.giveRaise(raiseAmount);
 
-        // After raise
         System.out.println("Tax (After): " + emp.calculateTax(taxRate));
 
-        sc.close();
+        input.close();
     }
 }
